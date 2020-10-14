@@ -1,0 +1,35 @@
+<p-card>
+    <div class="p-d-flex p-jc-center">
+        <span  class="p-float-label p-mr-5" >
+            <p-dropdown id="float-input" [options]="fromStations" optionLabel="value" [(ngModel)]="selectedFromStation" (onChange)="updateCalc()" [showClear]="false" [style]="{'width':'250px'}"></p-dropdown>
+            <label for="float-input">Пункт отправления</label>
+        </span>
+        <span  class="p-float-label p-mr-2" >
+
+        </span>
+        <span  class="p-float-label p-mr-5" >
+            <p-dropdown id="float-input" [options]="toStations" optionLabel="value" [(ngModel)]="selectedToStation" (onChange)="updateCalc()" [showClear]="false" [style]="{'width':'250px'}"></p-dropdown>
+            <label for="float-input">Пункт назначения</label>
+        </span>
+       
+    </div>
+</p-card>
+<p-card>
+    <div class="p-d-flex p-jc-center  p-as-stretch">
+        <span  class="p-float-label p-mr-5" >
+            <p-inputNumber id="float-input" [(ngModel)]="goodsWeight" (onBlur)="updateCalc()" [style]="{'width':'250px'}"> </p-inputNumber>
+            <label for="float-input">Вес груза, кг</label>
+        </span>
+        <span  class="p-float-label p-mr-2" >
+
+        </span>
+        <span  class="p-float-label p-mr-5" >
+            <p-inputNumber id="float-input" [(ngModel)]="goodsVolume" (onBlur)="updateCalc()" [style]="{'width':'250px'}"> </p-inputNumber>
+            <label for="float-input">Объем груза, м3</label>
+        </span>
+       
+    </div>
+</p-card>
+<p-card>
+    <div class="p-text-center p-text-bold" style="font-size:x-large">{{result}}</div>
+</p-card>

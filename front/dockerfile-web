@@ -1,0 +1,10 @@
+### STAGE 1: Build ###
+FROM node:12.18.4-alpine3.10 AS build
+WORKDIR /home/node/app
+COPY . .
+RUN npm install
+RUN npm run build --prod
+
+### STAGE 2: Run ###
+FROM httpd:2.4
+COPY --from=build /home/node/app/dist /usr/local/apache2/htdocs/
