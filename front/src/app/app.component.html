@@ -33,3 +33,6 @@
 <p-card>
     <div class="p-text-center p-text-bold" style="font-size:x-large">{{result}}</div>
 </p-card>
+<p-card *ngIf="result">
+    <div class="p-text-center " style="font-size:small">Расчет предварительный! Точную стоимость с учетом Ваших всех параметров уточняйте у менеджера.</div>
+</p-card>
