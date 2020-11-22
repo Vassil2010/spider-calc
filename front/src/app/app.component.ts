@@ -1,7 +1,8 @@
 import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { IrisService } from './services/irisservice';
-import { ToServer } from './models/toserver'
+import { ToServer } from './models/toserver';
+import { AddServiceOptions} from './models/addServiceOptions';
 
 @Component({
     selector: 'app-root',
@@ -12,22 +13,25 @@ import { ToServer } from './models/toserver'
 export class AppComponent implements OnInit {
     
     constructor(private irisService: IrisService) { }
-    
+    toServer :ToServer = new ToServer;
+
+    transportTypeOptions: any[];
     fromStations        :string[];
-    selectedFromStation :string;
     toStations          :string[];
-    selectedToStation   :string;
-    goodsWeight         :number;
-    goodsVolume         :number;
     result              :string;
 
+    addServices:AddServiceOptions[] = [];
+   
     ngOnInit() {
+        this.transportTypeOptions = [
+            {label: 'Море', value: 'sea'}, {label: 'Авиа', value: 'avia'}
+        ];
         this.irisService.get('getFromStation')
             .subscribe(data => {
                 
                 if ('OK'.indexOf(data.status) !== -1) {
                     this.fromStations = data.data;
-                    this.selectedFromStation = data.data[0];
+                    this.toServer.fromStation = data.data[0];
                 }
             });
         this.irisService.get('getToStation')
@@ -35,22 +39,29 @@ export class AppComponent implements OnInit {
                 
                 if ('OK'.indexOf(data.status) !== -1) {
                     this.toStations = data.data;
-                    this.selectedToStation = data.data[0];
+                    this.toServer.toStation = data.data[0];
                 }
-            });    
+            });  
+        this.irisService.get('getAddServices')
+            .subscribe(data => {
+                if ('OK'.indexOf(data.status) !== -1) {
+                    this.addServices = data.data;
+                    if (data.data.AddServicesIsAlways) { 
+                        data.data.AddServicesIsAlways.forEach(function(item) {
+                          
+                            if (this.toServer.dop.indexOf(item.label)==-1) {
+                                this.toServer.dop.push(item.label);
+                            }
+                        },this);
+                   }
+                }
+            });   
         
     }
     
 
     getCalc() {
-        
-        const a = new ToServer;
-        a.fromStation   = this.selectedFromStation;
-        a.toStation     = this.selectedToStation;
-        a.goodsWeight   = this.goodsWeight;
-        a.goodsVolume   = this.goodsVolume;
-        
-            this.irisService.post(a,'getCalc')
+            this.irisService.post(this.toServer,'getCalc')
                 .subscribe(data => {
                     
                     

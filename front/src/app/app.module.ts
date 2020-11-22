@@ -15,6 +15,7 @@ import { AppComponent } from './app.component';
 import { CheckboxModule } from 'primeng/checkbox';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
+import {SelectButtonModule} from 'primeng/selectbutton';
 
 
 
@@ -37,6 +38,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
         CheckboxModule,
         DropdownModule,
         InputNumberModule,
+        SelectButtonModule,
         RouterModule.forRoot([
             {path:'',component: AppComponent}
               ])
