@@ -40,7 +40,8 @@
 
         </span>
         <span  class="p-float-label p-mr-5" >
-            <p-inputNumber id="float-input" [(ngModel)]="toServer.goodsVolume" (onBlur)="updateCalc()" [style]="{'width':'250px'}"> </p-inputNumber>
+            <p-inputNumber id="float-input" [(ngModel)]="toServer.goodsVolume" (onBlur)="updateCalc()" [style]="{'width':'250px'}"
+            mode="decimal" [minFractionDigits]="2"> </p-inputNumber>
             <label for="float-input">Объем груза, м3</label>
         </span>
        
