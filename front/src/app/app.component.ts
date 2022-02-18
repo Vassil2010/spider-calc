@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
     toServer :ToServer = new ToServer;
 
     transportTypeOptions: any[];
+    goodsTypeOptions: any[];
     fromStations        :string[];
     toStations          :string[];
     result              :string;
@@ -25,6 +26,9 @@ export class AppComponent implements OnInit {
     ngOnInit() {
         this.transportTypeOptions = [
             {label: 'Море', value: 'sea'}, {label: 'Авиа', value: 'avia'}
+        ];
+        this.goodsTypeOptions = [
+            {label: 'Обычный', value: 'general'}, {label: 'Социальный', value: 'social'}
         ];
         this.irisService.get('getFromStation')
             .subscribe(data => {

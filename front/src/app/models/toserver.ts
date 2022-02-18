@@ -5,6 +5,7 @@ export class ToServer {
     goodsWeight :number;
     goodsVolume :number;
     transportType: string = 'sea';
+    goodsType: string = 'general';
     dop :string[] = [];
     goodsPrice:number;
 }
