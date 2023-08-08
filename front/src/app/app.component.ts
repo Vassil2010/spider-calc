@@ -22,13 +22,18 @@ export class AppComponent implements OnInit {
     result              :string;
 
     addServices:AddServiceOptions[] = [];
+
+    goodsVolumeDisabled = false;
+    goodsDimensionsParaDisabled = false;
    
     ngOnInit() {
         this.transportTypeOptions = [
             {label: 'Море', value: 'sea'}, {label: 'Авиа', value: 'avia'}
         ];
         this.goodsTypeOptions = [
-            {label: 'Обычный', value: 'general'}, {label: 'Социальный', value: 'social'}
+            {label: 'Обычный', value: 'general'}, 
+            {label: 'Социальный груз', value: 'social'},
+            {label: 'Продукты (море, тепло)', value: 'product'}
         ];
         this.irisService.get('getFromStation')
             .subscribe(data => {
@@ -65,6 +70,8 @@ export class AppComponent implements OnInit {
     
 
     getCalc() {
+
+        
             this.irisService.post(this.toServer,'getCalc')
                 .subscribe(data => {
                     
@@ -77,7 +84,21 @@ export class AppComponent implements OnInit {
         
     }
     updateCalc() {
+        this.updateControls();
         this.getCalc();
+    }
+    updateControls() {
+        if ((this.toServer.goodsVolume!=null)||(this.toServer.goodsVolume>0)) {   
+            this.goodsDimensionsParaDisabled = true;
+        } 
+        
+        if ((this.toServer.goodsHeight) && (this.toServer.goodsLength) && (this.toServer.goodsWidth)) {
+            this.goodsVolumeDisabled = true;
+        }
+        if ((this.toServer.goodsHeight==null) && (this.toServer.goodsLength==null) && (this.toServer.goodsWidth==null) && (this.toServer.goodsVolume==null)) {
+            this.goodsVolumeDisabled = false;
+            this.goodsDimensionsParaDisabled = false;
+        }
     }
    
 }

@@ -8,4 +8,7 @@ export class ToServer {
     goodsType: string = 'general';
     dop :string[] = [];
     goodsPrice:number;
+    goodsLength:number;
+    goodsWidth:number;
+    goodsHeight:number;
 }

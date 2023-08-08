@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 export class IrisService {
     constructor(private http: HttpClient) {
         if (environment.production) {
-            this.serverhost = 'http://base.progrepublic.ru/csp/motion-calc/';
+            this.serverhost = 'https://calc.24dtk.ru/csp/motion-calc/';
         } else {
             this.serverhost = 'http://localhost:57772/calc/';
         }
